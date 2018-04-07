@@ -1,0 +1,16 @@
+version: '3.2'
+services:
+  mysql:
+    image: "mysql"
+    ports:
+      - "3306:3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=changeme
+    networks:
+      - vault-net
+  server:
+    image: "furikuri/demo"
+    networks:
+      - vault-net
+networks:
+  vault-net:
