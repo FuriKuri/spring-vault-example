@@ -1,5 +1,5 @@
 spring.cloud.vault:
-
+  host: localhost
   token: a9beafc0-2d9a-188a-cbb5-c898e7df6295
   scheme: http
   generic:
@@ -9,4 +9,4 @@ spring.cloud.vault:
     enabled: true
     role: readonly
 
-spring.datasource.url: jdbc:mysql://127.0.0.1:3306
+spring.datasource.url: jdbc:mysql://localhost:3306
