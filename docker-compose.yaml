@@ -8,8 +8,12 @@ services:
       - MYSQL_ROOT_PASSWORD=changeme
     networks:
       - vault-net
-  server:
-    image: "furikuri/demo"
+  vault:
+    image: "vault"
+    ports:
+      - "8200:8200"
+    cap_add:
+      - IPC_LOCK
     networks:
       - vault-net
 networks:
