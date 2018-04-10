@@ -1,5 +1,9 @@
 # spring-vault-example
 
+
+## Usage
+
+Start the mysql and vault server.
 ```
 $ docker-compose up
   ...
@@ -10,6 +14,9 @@ $ docker-compose up
   mysql_1  | Version: '5.7.21'  socket: '/var/run/mysqld/mysqld.sock'  port: 3306  MySQL Community Server (GPL)
 ```
 
+After vault was started, export the token, which is printed in the log from the vault container into the environment variable `VAULT_TOKEN`.
+Also set the `VAULT_ADDR` to http://127.0.0.1:8200. Otherwise the vault client expect a https connection.
+Then use the vault client to configure the mysql readonly role, we will use in the sprint boot app.
 ```
 $ export VAULT_TOKEN=f6b9d03d-d7bf-ed6f-71e1-690b9d2796e8
 
@@ -23,6 +30,7 @@ $ vault write mysql/roles/readonly sql="CREATE USER '{{name}}'@'%' IDENTIFIED BY
 
 ```
 
+You can verify, if the role and the created users by vault are working.
 ```
 $ vault read mysql/creds/readonly
   Key                Value
@@ -40,6 +48,7 @@ $ docker exec -it springvaultexample_mysql_1 mysql -uread-root-2dbfea -pec033f5d
   Server version: 5.7.21 MySQL Community Server (GPL)
 ```
 
+Create a vault token for the spring boot app, export the value and start the spring boot app.
 ```
 $ vault token create
   Key                Value
